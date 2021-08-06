@@ -192,45 +192,15 @@ namespace JurassicPark
         private static void TransferDino(DinoDatabase database)
         {
             // - Prompt for the name
+            Console.ForegroundColor = ConsoleColor.Magenta;
             var nameToSearchFor = PromptForString("\nWhat name are you looking for? ");
 
             Dino foundDino = database.FindOneDino(nameToSearchFor);
 
-            //   - if enclosure
-            // if (changeChoice == "ENCLOSURE")
-            // {
-            //     //      - prompt for new enclosure
-            //     foundDino.EnclosureNumber = PromptForInteger("What is the new enclosure number? ");
-            // }
+            database.TransferDino(nameToSearchFor);
 
-            // foreach (var dino in database.GetAllDinos())
-            // {
-            //     Console.WriteLine(dino);
-            // }
-
-            // foreach (var dino in database.GetAllDinos())
-            // {
-            //     if (foundDino.Distinct().Count() == dino.Count())
-            //     {
-
-            //     }
-            // }
-
-
-            // - After the loop, `foundDino` is either `null` (not found) or refers to the matching item
-            if (foundDino == null)
-            {
-                // - Show a message if `null`
-                Console.WriteLine("No such dino!");
-            }
-            else
-            {
-                // - otherwise show the details.
-
-                Console.WriteLine($"\n\nHere is the requested data for {foundDino.Name}");
-                Console.WriteLine($"{foundDino}");
-            }
             database.SaveDinos();
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         private static void SummaryOfDinos(DinoDatabase database)

@@ -60,17 +60,91 @@ namespace JurassicPark
             return foundDino;
         }
 
+        public Dino FindOneDinoType(string typeToFind)
+        {
+            Dino foundDinoType = Dinos.FirstOrDefault(dino => dino.DinoType.ToUpper().Contains(typeToFind.ToUpper()));
+
+            return foundDinoType;
+        }
+
         public void TransferDino(string nameToFind)
         {
-            // var foundDino = FindOneDino(nameToFind);
-            // var numNames = Dinos.Count(dino => dino.Name == nameToFind);
+            var foundDino = Dinos.Count(dino => dino.Name.Contains(nameToFind));
+            Console.WriteLine(foundDino);
 
-            // if (foundDino == null)
-            // {
-            //     // - Show a message if `null`
-            //     Console.WriteLine("No such dino!");
-            // }
-            // else if (foundDino != null && Int32.foundDino != numNames)
+            if (foundDino == 0)
+            {
+                Console.WriteLine("No such dino!");
+            }
+            else
+            {
+                if (foundDino > 1)
+                {
+                    var foundDinos = Dinos.Where(dino => dino.Name.Contains(nameToFind));
+
+                    foreach (var dino in foundDinos)
+                    {
+                        Console.WriteLine(dino);
+                    }
+
+                    Console.WriteLine($"\nThere are {foundDino} Dinos with {nameToFind} as there name, which type of Dino are you trying to move? ");
+                    var dinoType = Console.ReadLine();
+
+                    Console.WriteLine(FindOneDinoType(dinoType));
+                    Console.WriteLine($"\nAre you sure you want to move this dino? (Yes/No)");
+                    var usersChoice = Console.ReadLine().ToUpper();
+
+                    if (usersChoice == "Y" || usersChoice == "YES")
+                    {
+                        var dinoToMove = FindOneDinoType(dinoType);
+                        Console.WriteLine("\nWhat is the new enclosure number? ");
+
+                        int newEnclosure;
+                        bool wasAbleToParse = Int32.TryParse(Console.ReadLine(), out newEnclosure);
+                        if (wasAbleToParse)
+                        {
+                            dinoToMove.EnclosureNumber = newEnclosure;
+                        }
+                        else
+                        {
+                            Console.WriteLine("WTFA!?!?!");
+                        }
+
+                    }
+                }
+                else
+                {
+                    var foundDinos = Dinos.Where(dino => dino.Name.Contains(nameToFind));
+
+                    Console.WriteLine($"\nThere was only {foundDino} Dino with {nameToFind} as there name. ");
+
+                    foreach (var dino in foundDinos)
+                    {
+                        Console.WriteLine(dino);
+                    }
+
+                    Console.WriteLine($"\nAre you sure you want to move this dino? (Yes/No)");
+                    var usersChoice = Console.ReadLine().ToUpper();
+
+                    if (usersChoice == "Y" || usersChoice == "YES")
+                    {
+                        var dinoToMove = FindOneDino(nameToFind);
+                        Console.WriteLine("\nWhat is the new enclosure number? ");
+
+                        int newEnclosure;
+                        bool wasAbleToParse = Int32.TryParse(Console.ReadLine(), out newEnclosure);
+                        if (wasAbleToParse)
+                        {
+                            dinoToMove.EnclosureNumber = newEnclosure;
+                        }
+                        else
+                        {
+                            Console.WriteLine("WTFA!?!?!");
+                        }
+
+                    }
+                }
+            }
         }
 
 
@@ -103,16 +177,19 @@ namespace JurassicPark
                     if (sumOf == "c" || sumOf == "carnivore")
                     {
                         Console.WriteLine("\nDino Summary: ");
+                        validChoice = true;
                         Console.WriteLine($"Carnivores: {numCarnivores}\n");
                     }
                     else if (sumOf == "o" || sumOf == "omnivore")
                     {
                         Console.WriteLine("\nDino Summary: ");
+                        validChoice = true;
                         Console.WriteLine($"Omnivores: {numOmnivores}\n");
                     }
                     else if (sumOf == "h" || sumOf == "herbivore")
                     {
                         Console.WriteLine("\nDino Summary: ");
+                        validChoice = true;
                         Console.WriteLine($"Herbivores: {numHerbivores}\n");
                     }
                     else
@@ -138,7 +215,6 @@ namespace JurassicPark
 
             }
 
-            // return "There was no data found!";
         }
 
         // DELETE Dino

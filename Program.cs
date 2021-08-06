@@ -249,6 +249,21 @@ namespace JurassicPark
             Console.ForegroundColor = ConsoleColor.White;
         }
 
+        static void ExitMessage()
+        {
+            // Credit to https://www.ascii-art-generator.org/ for ascii art
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(" ######                  #######                  #     #               ### ");
+            Console.WriteLine(" #     # #   # ######    #        ####  #####     ##    #  ####  #    # ### ");
+            Console.WriteLine(" #     #  # #  #         #       #    # #    #    # #   # #    # #    # ### ");
+            Console.WriteLine(" ######    #   #####     #####   #    # #    #    #  #  # #    # #    #  #  ");
+            Console.WriteLine(" #     #   #   #         #       #    # #####     #   # # #    # # ## #     ");
+            Console.WriteLine(" #     #   #   #         #       #    # #   #     #    ## #    # ##  ## ### ");
+            Console.WriteLine(" ######    #   ######    #        ####  #    #    #     #  ####  #    # ### ");
+            Console.ForegroundColor = ConsoleColor.White;
+
+        }
+
         static void Main(string[] args)
         {
             //Console.WriteLine("Welcome to C#");
@@ -267,8 +282,7 @@ namespace JurassicPark
             while (keepGoing)
             {
                 // Insert a blank line then prompt them and get their answer (force uppercase)
-                Console.WriteLine();
-                Console.Write("What do you want to do?\n(A)dd a dino\n(D)elete a dino\n(F)ind a dino\n(L)ist all the dinos\n(U)pdate a dino\n(T)ransfer a dino\n(S)ummary of dinos\n(Q)uit\n: ");
+                Console.Write("\nWhat do you want to do?\n(A)dd a dino\n(D)elete a dino\n(F)ind a dino\n(L)ist all the dinos\n(U)pdate a dino\n(T)ransfer a dino\n(S)ummary of dinos\n(Q)uit\n: ");
                 var choice = Console.ReadLine().ToUpper();
 
                 switch (choice)
@@ -295,6 +309,8 @@ namespace JurassicPark
                         SummaryOfDinos(database);
                         break;
                     case "Q":
+                        Console.WriteLine();
+                        ExitMessage();
                         keepGoing = false;
                         break;
                     default:

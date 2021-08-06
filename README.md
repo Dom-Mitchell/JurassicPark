@@ -4,7 +4,7 @@
 
 - First search through Dino database for findName
   - If Dino database.Name(findName) == null
-    - return no Dino by that name in our database
+    - print "No Dino by that name in our database"
   - else
     - If Dino database.Name(findName).Contains > 1
       - print list of Dinos database.Name(findName)
